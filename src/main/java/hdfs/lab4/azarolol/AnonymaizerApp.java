@@ -8,6 +8,7 @@ import akka.stream.ActorMaterializer;
 import org.apache.zookeeper.ZooKeeper;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class AnonymaizerApp {
     private static final String ACTOR_SYSTEM_NAME = "AnonymizerActors";
@@ -19,9 +20,12 @@ public class AnonymaizerApp {
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
 
-        ZooKeeper zoo = new ZooKeeper(args[INDEX_OF_SERVER], ZOOKEEPER_TIMEOUT, null);
+        final String port = args[INDEX_OF_SERVER];
+        ZooKeeper zoo = new ZooKeeper(port, ZOOKEEPER_TIMEOUT, null);
         ZookeeperWatcher watcher = new ZookeeperWatcher(storage, zoo);
 
-        
+        final String url = "localhost:" + port;
+        zoo.create(url.getBytes(),
+                
     }
 }
