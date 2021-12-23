@@ -11,7 +11,7 @@ import java.util.*;
 public class ZookeeperWatcher implements Watcher {
     private final ActorRef storage;
     private final ZooKeeper zoo;
-    private final String SERVERS_PATH = "/servers";
+    private static final String SERVERS_PATH = "/servers";
 
     public ZookeeperWatcher(ActorRef storage, ZooKeeper zoo) {
         this.storage = storage;
@@ -33,5 +33,6 @@ public class ZookeeperWatcher implements Watcher {
                 e.printStackTrace();
             }
         }
+        storage.tell(new ServersListMessage(servers), ActorRef.noSender());
     }
 }
