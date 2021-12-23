@@ -4,6 +4,8 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.http.javadsl.Http;
+import akka.http.javadsl.model.HttpRequest;
+import akka.http.javadsl.model.HttpResponse;
 import akka.stream.ActorMaterializer;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
@@ -33,6 +35,6 @@ public class AnonymaizerApp {
                 ZooDefs.Ids.OPEN_ACL_UNSAFE,
                 CreateMode.EPHEMERAL_SEQUENTIAL);
 
-
+        final Flow<HttpRequest, HttpResponse, NotUsed> 
     }
 }
