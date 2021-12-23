@@ -1,2 +1,5 @@
-package hdfs.lab4.azarolol;public class GetRandomServerMessage {
+package hdfs.lab4.azarolol;
+
+public class GetRandomServerMessage {
+    
 }
