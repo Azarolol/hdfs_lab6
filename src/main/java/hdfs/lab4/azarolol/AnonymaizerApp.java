@@ -22,7 +22,7 @@ public class AnonymaizerApp {
     private static final int INDEX_OF_SERVER = 0;
     private static final int ZOOKEEPER_TIMEOUT = 3000;
     private static final String SERVERS_PATH = "/servers";
-    private static final String LOCALHOST = "localhost";
+    private static final String LOCALHOST = "127.0.0.1";
     public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
         ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
         ActorRef storage = system.actorOf(Props.create(ConfigStorageActor.class));
