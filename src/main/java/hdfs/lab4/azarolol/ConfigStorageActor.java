@@ -13,6 +13,6 @@ public class ConfigStorageActor extends AbstractActor {
                 .match(ServersListMessage.class,
                         message -> )
                 .match(GetRandoServerMessage.class,
-                        )
+                        message -> sender().tell())
     }
 }
