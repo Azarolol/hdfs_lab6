@@ -1,6 +1,7 @@
 package hdfs.lab4.azarolol;
 
 import akka.actor.AbstractActor;
+import akka.actor.Actor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,6 @@ public class ConfigStorageActor extends AbstractActor {
                 .match(ServersListMessage.class,
                         message -> )
                 .match(GetRandoServerMessage.class,
-                        message -> sender().tell(servers.get(new Random().nextInt(servers.size()))))
+                        message -> sender().tell(servers.get(new Random().nextInt(servers.size())), Actor.noSender()))
     }
 }
