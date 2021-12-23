@@ -1,2 +1,4 @@
-package hdfs.lab4.azarolol;public class ConfigStorageActor {
+package hdfs.lab4.azarolol;
+
+public class ConfigStorageActor {
 }
