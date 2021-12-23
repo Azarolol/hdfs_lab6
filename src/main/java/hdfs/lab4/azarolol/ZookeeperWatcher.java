@@ -16,6 +16,7 @@ public class ZookeeperWatcher implements Watcher {
 
     @Override
     public void process(WatchedEvent watchedEvent) {
-        
+        zoo.getChildren(SERVER_PATH, this);
+
     }
 }
