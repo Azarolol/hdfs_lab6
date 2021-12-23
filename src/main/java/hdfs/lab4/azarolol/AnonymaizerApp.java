@@ -5,6 +5,8 @@ import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.http.javadsl.Http;
 import akka.stream.ActorMaterializer;
+import org.apache.zookeeper.CreateMode;
+import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
 
 import java.io.IOException;
@@ -25,7 +27,9 @@ public class AnonymaizerApp {
         ZookeeperWatcher watcher = new ZookeeperWatcher(storage, zoo);
 
         final String url = "localhost:" + port;
-        zoo.create(url.getBytes(),
-                
+        zoo.create(
+                url.getBytes(),
+                ZooDefs.Ids.OPEN_ACL_UNSAFE,
+                CreateMode.EPHEMERAL_SEQUENTIAL);
     }
 }
