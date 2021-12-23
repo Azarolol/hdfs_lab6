@@ -1,4 +1,4 @@
-package hdfs.lab4.azarolol;
+package hdfs.lab6.azarolol;
 
 import java.util.List;
 

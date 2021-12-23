@@ -1,4 +1,4 @@
-package hdfs.lab4.azarolol;
+package hdfs.lab6.azarolol;
 
 import akka.NotUsed;
 import akka.actor.ActorRef;
@@ -23,7 +23,7 @@ public class AnonymaizerApp {
     private static final int ZOOKEEPER_TIMEOUT = 3000;
     private static final String SERVERS_PATH = "/servers";
     private static final String LOCALHOST = "127.0.0.1";
-    public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
+    public static void main(String[] args) throws IOException {
         ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
         ActorRef storage = system.actorOf(Props.create(ConfigStorageActor.class));
         final Http http = Http.get(system);
