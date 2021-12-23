@@ -31,6 +31,7 @@ public class HTTPServer {
                             get(() ->
                                     parameter(URL_QUERY, (url) ->
                                             parameter(COUNT_QUERY, (count) -> {
+                                                log.info(String.format(LOG_FORMAT_STRING, url, count))
                                         int count_int = Integer.parseInt(count);
                                         if (count_int == 0) {
                                             return completeWithFuture(
