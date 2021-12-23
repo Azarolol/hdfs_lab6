@@ -5,6 +5,7 @@ import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.http.javadsl.Http;
 import akka.stream.ActorMaterializer;
+import org.apache.zookeeper.ZooKeeper;
 
 public class AnonymaizerApp {
     public static void main(String[] args) {
@@ -13,7 +14,7 @@ public class AnonymaizerApp {
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
 
-        
+        ZooKeeper zoo = new ZooKeeper(args[INDEX_OF_])
 
     }
 }
