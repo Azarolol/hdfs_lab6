@@ -8,7 +8,7 @@ import akka.stream.ActorMaterializer;
 import org.apache.zookeeper.ZooKeeper;
 
 public class AnonymaizerApp {
-    
+    private static final String ACTOR_SYSTEM_NAME = ""
     public static void main(String[] args) {
         ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
         ActorRef storage = system.actorOf(Props.create(ConfigStorageActor.class));
