@@ -34,6 +34,6 @@ public class AnonymaizerApp {
                 ZooDefs.Ids.OPEN_ACL_UNSAFE,
                 CreateMode.EPHEMERAL_SEQUENTIAL);
 
-        final Flow<HttpRequest, >
+        
     }
 }
