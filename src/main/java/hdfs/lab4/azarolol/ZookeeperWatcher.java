@@ -28,7 +28,7 @@ public class ZookeeperWatcher implements Watcher {
         }
         for (String s : servers) {
             try {
-                servers.add(Arrays.toString(zoo.getData(SERVERS_PATH + "/" + s, false, null)));
+                servers.add(new String(zoo.getData(SERVERS_PATH + "/" + s, false, null)));
             } catch (KeeperException | InterruptedException e) {
                 e.printStackTrace();
             }
