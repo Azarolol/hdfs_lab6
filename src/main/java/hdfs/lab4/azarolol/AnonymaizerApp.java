@@ -34,10 +34,14 @@ public class AnonymaizerApp {
         ZooKeeper zoo = new ZooKeeper(url, ZOOKEEPER_TIMEOUT, null);
         ZookeeperWatcher watcher = new ZookeeperWatcher(storage, zoo);
 
-        zoo.create(SERVERS_PATH,
-                url.getBytes(),
-                ZooDefs.Ids.OPEN_ACL_UNSAFE,
-                CreateMode.EPHEMERAL_SEQUENTIAL);
+        try {
+            zoo.create(SERVERS_PATH,
+                    url.getBytes(),
+                    ZooDefs.Ids.OPEN_ACL_UNSAFE,
+                    CreateMode.EPHEMERAL_SEQUENTIAL);
+        } catch (KeeperException | InterruptedException e) {
+            e.printStackTrace();
+        }
 
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = new HTTPServer(http, storage, materializer.logger()).createRoute().flow(system, materializer);
         http.bindAndHandle(routeFlow, ConnectHttp.toHost(LOCALHOST, Integer.parseInt(port)), materializer);
