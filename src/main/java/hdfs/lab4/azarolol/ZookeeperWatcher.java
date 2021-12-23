@@ -6,7 +6,7 @@ import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 
-import java.util.List;
+import java.util.*;
 
 public class ZookeeperWatcher implements Watcher {
     private final ActorRef storage;
@@ -20,12 +20,18 @@ public class ZookeeperWatcher implements Watcher {
 
     @Override
     public void process(WatchedEvent watchedEvent) {
-        List<String> servers;
+        List<String> servers = new ArrayList<String>();
         try {
             servers = zoo.getChildren(SERVERS_PATH, this);
         } catch (KeeperException | InterruptedException e) {
             e.printStackTrace();
         }
-        
+        for (String s : servers) {
+            try {
+                servers.add(Arrays.toString(zoo.getData(SERVERS_PATH + "/" + s, false, null)));
+            } catch (KeeperException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
