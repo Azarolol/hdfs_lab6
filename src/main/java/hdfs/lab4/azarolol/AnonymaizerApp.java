@@ -30,10 +30,10 @@ public class AnonymaizerApp {
         final ActorMaterializer materializer = ActorMaterializer.create(system);
 
         final String port = args[INDEX_OF_SERVER];
-        ZooKeeper zoo = new ZooKeeper(port, ZOOKEEPER_TIMEOUT, null);
+        final String url = LOCALHOST + ":" + port;
+        ZooKeeper zoo = new ZooKeeper(url, ZOOKEEPER_TIMEOUT, null);
         ZookeeperWatcher watcher = new ZookeeperWatcher(storage, zoo);
 
-        final String url = LOCALHOST + ":" + port;
         zoo.create(SERVERS_PATH,
                 url.getBytes(),
                 ZooDefs.Ids.OPEN_ACL_UNSAFE,
