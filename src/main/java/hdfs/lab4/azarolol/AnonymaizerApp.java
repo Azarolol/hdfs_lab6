@@ -14,7 +14,8 @@ public class AnonymaizerApp {
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
 
-        ZooKeeper zoo = new ZooKeeper(args[INDEX_OF_])
+        ZooKeeper zoo = new ZooKeeper(args[INDEX_OF_ADRESS], ZOOKEEPER_TIMEOUT, );
+
 
     }
 }
