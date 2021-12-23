@@ -1,4 +1,6 @@
 package hdfs.lab4.azarolol;
 
-public class ConfigStorageActor {
+import akka.actor.AbstractActor;
+
+public class ConfigStorageActor extends AbstractActor {
 }
