@@ -39,7 +39,7 @@ public class AnonymaizerApp {
                 ZooDefs.Ids.OPEN_ACL_UNSAFE,
                 CreateMode.EPHEMERAL_SEQUENTIAL);
 
-        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = new HTTPServer(http, storage).createRoute().flow(system, materializer);
+        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = new HTTPServer(http, storage, materializer.logger()).createRoute().flow(system, materializer);
         http.bindAndHandle(routeFlow, ConnectHttp.toHost(LOCALHOST, Integer.parseInt(port)), materializer);
     }
 }
