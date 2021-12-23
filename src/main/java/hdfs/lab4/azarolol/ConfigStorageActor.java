@@ -8,13 +8,15 @@ import java.util.List;
 import java.util.Random;
 
 public class ConfigStorageActor extends AbstractActor {
-    private List<String> servers = new ArrayList<>();
+    private final List<String> servers = new ArrayList<>();
+    private final Random randomizer = new Random();
     @Override
     public Receive createReceive() {
         return receiveBuilder()
                 .match(ServersListMessage.class,
                         message -> )
                 .match(GetRandoServerMessage.class,
-                        message -> sender().tell(servers.get(new Random().nextInt(servers.size())), Actor.noSender()))
+                        message -> sender().tell(servers.get(randomizer.nextInt(servers.size())), Actor.noSender()))
+                .build();
     }
 }
