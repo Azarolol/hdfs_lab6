@@ -20,7 +20,8 @@ public class AnonymaizerApp {
         final ActorMaterializer materializer = ActorMaterializer.create(system);
 
         ZooKeeper zoo = new ZooKeeper(args[INDEX_OF_SERVER], ZOOKEEPER_TIMEOUT, null);
+        ZookeeperWatcher watcher = new ZookeeperWatcher(storage, zoo);
 
-
+        
     }
 }
