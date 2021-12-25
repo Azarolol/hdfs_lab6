@@ -35,8 +35,13 @@ public class AnonymaizerApp {
 
         final String port = args[INDEX_OF_SERVER];
         final String url = LOCALHOST + ":" + port;
-        ZooKeeper zoo = new ZooKeeper(url, ZOOKEEPER_TIMEOUT, null);
-        ZookeeperWatcher watcher = new ZookeeperWatcher(storage, zoo, log);
+        ZooKeeper zoo = null;
+        try {
+            zoo = new ZooKeeper(url, ZOOKEEPER_TIMEOUT, null);
+            new ZookeeperWatcher(storage, zoo, log);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         try {
             zoo.create(SERVERS_PATH,
