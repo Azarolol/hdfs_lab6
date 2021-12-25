@@ -25,7 +25,7 @@ public class AnonymaizerApp {
     private static final int ZOOKEEPER_TIMEOUT = 3000;
     private static final String SERVERS_PATH = "/servers";
     private static final String LOCALHOST = "127.0.0.1";
-    private static final String ZOOKEPER_PORT = "2181";
+    private static final String ZOOKEEPER_PORT = "2181";
     public static void main(String[] args) throws IOException {
         ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
         ActorRef storage = system.actorOf(Props.create(ConfigStorageActor.class));
@@ -38,7 +38,7 @@ public class AnonymaizerApp {
         final String url = LOCALHOST + ":" + port;
         ZooKeeper zoo = null;
         try {
-            zoo = new ZooKeeper(LOCALHOST + ":" + ZOOKEPER_PORT, ZOOKEEPER_TIMEOUT, null);
+            zoo = new ZooKeeper(LOCALHOST + ":" + ZOOKEEPER_PORT, ZOOKEEPER_TIMEOUT, null);
             new ZookeeperWatcher(storage, zoo, log);
         } catch (InterruptedException | KeeperException e) {
             e.printStackTrace();

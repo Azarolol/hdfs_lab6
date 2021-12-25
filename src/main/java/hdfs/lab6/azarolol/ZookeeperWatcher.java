@@ -21,7 +21,7 @@ public class ZookeeperWatcher implements Watcher {
         this.zoo = zoo;
         this.log = log;
 
-        List<String> servers = new ArrayList<String>();
+        List<String> servers;
         servers = zoo.getChildren(SERVERS_PATH, this);
 
         for (String s : servers) {
