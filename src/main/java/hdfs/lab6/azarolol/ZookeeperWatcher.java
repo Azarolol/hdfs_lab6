@@ -16,7 +16,7 @@ public class ZookeeperWatcher implements Watcher {
     private static final String SERVERS_PATH = "/servers";
     private static final String LOG_FORMAT_STRING = "Server added: %s";
 
-    public ZookeeperWatcher(ActorRef storage, ZooKeeper zoo, LoggingAdapter log) {
+    public ZookeeperWatcher(ActorRef storage, ZooKeeper zoo, LoggingAdapter log) throws InterruptedException, KeeperException {
         this.storage = storage;
         this.zoo = zoo;
         this.log = log;
