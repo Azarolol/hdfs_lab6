@@ -29,10 +29,7 @@ public class HTTPServer {
     }
 
     public Route createRoute() {
-        return route(
-            path(EMPTY_STRING, () ->
-                    route(
-                            get(() ->
+        return path(EMPTY_STRING, () ->
                                     parameter(URL_QUERY, (url) ->
                                             parameter(COUNT_QUERY, (count) -> {
                                                 log.info(String.format(LOG_FORMAT_STRING, url, count));
@@ -61,7 +58,6 @@ public class HTTPServer {
                                                         )
                                         );
                                     }))
-                    ))
-        ));
+                    );
     }
 }
