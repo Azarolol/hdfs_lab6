@@ -14,7 +14,7 @@ public class ZookeeperWatcher implements Watcher {
     private final ZooKeeper zoo;
     private final LoggingAdapter log;
     private static final String SERVERS_PATH = "/servers";
-    private static final String LOG_FORMAT_STRING = "Server added: %s";
+    private static final String LOG_FORMAT_STRING = "Server %d: %s";
 
     public ZookeeperWatcher(ActorRef storage, ZooKeeper zoo, LoggingAdapter log) throws InterruptedException, KeeperException {
         this.storage = storage;
@@ -28,11 +28,13 @@ public class ZookeeperWatcher implements Watcher {
         List<String> servers = new ArrayList<String>();
         try {
             for (String s : zoo.getChildren(SERVERS_PATH, this)) {
-                log.info(String.format(LOG_FORMAT_STRING, s));
                 servers.add(new String(zoo.getData(SERVERS_PATH + "/" + s, false, null)));
             }
         } catch (KeeperException | InterruptedException e) {
                 e.printStackTrace();
+        }
+        for (int i = 0; i < servers.size(); i++) {
+            log.info(String.format(LOG_FORMAT_STRING, i, servers.get(i)));
         }
         storage.tell(new ServersListMessage(servers), ActorRef.noSender());
     }
