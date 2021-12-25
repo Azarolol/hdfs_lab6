@@ -41,6 +41,7 @@ public class AnonymaizerApp {
             new ZookeeperWatcher(storage, zoo, log);
         } catch (InterruptedException | KeeperException e) {
             e.printStackTrace();
+            System.exit(-1);
         }
 
         try {
