@@ -36,14 +36,7 @@ public class AnonymaizerApp {
 
         final String port = args[INDEX_OF_SERVER];
         final String url = LOCALHOST + ":" + port;
-        ZooKeeper zoo = null;
-        try {
-            zoo = new ZooKeeper(LOCALHOST + ":" + ZOOKEEPER_PORT, ZOOKEEPER_TIMEOUT, null);
-            new ZookeeperWatcher(storage, zoo, log);
-        } catch (InterruptedException | KeeperException e) {
-            e.printStackTrace();
-            System.exit(-1);
-        }
+        ZooKeeper zoo = initZoo(storage, log);
 
         try {
             zoo.create(SERVERS_PATH + "/s",
@@ -56,5 +49,17 @@ public class AnonymaizerApp {
 
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = new HTTPServer(http, storage, log).createRoute().flow(system, materializer);
         http.bindAndHandle(routeFlow, ConnectHttp.toHost(LOCALHOST, Integer.parseInt(port)), materializer);
+    }
+
+    private static ZooKeeper initZoo(ActorRef storage, LoggingAdapter log) throws IOException {
+        ZooKeeper zoo = null;
+        try {
+            zoo = new ZooKeeper(LOCALHOST + ":" + ZOOKEEPER_PORT, ZOOKEEPER_TIMEOUT, null);
+            new ZookeeperWatcher(storage, zoo, log);
+        } catch (InterruptedException | KeeperException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
+        return zoo;
     }
 }

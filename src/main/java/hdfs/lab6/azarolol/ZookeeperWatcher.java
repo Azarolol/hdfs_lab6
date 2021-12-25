@@ -26,20 +26,11 @@ public class ZookeeperWatcher implements Watcher {
             servers = zoo.getChildren(SERVERS_PATH, this);
         } catch (KeeperException | InterruptedException e) {
             e.printStackTrace();
+            throw e
         }
-        for (String s : servers) {
-            try {
-                log.info(String.format(LOG_FORMAT_STRING, s));
-                servers.add(new String(zoo.getData(SERVERS_PATH + "/" + s, false, null)));
-            } catch (KeeperException | InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        storage.tell(new ServersListMessage(servers), ActorRef.noSender());
     }
 
-    @Override
-    public void process(WatchedEvent watchedEvent) {
+    public void update() {
         List<String> servers = new ArrayList<String>();
         try {
             servers = zoo.getChildren(SERVERS_PATH, this);
@@ -55,5 +46,10 @@ public class ZookeeperWatcher implements Watcher {
             }
         }
         storage.tell(new ServersListMessage(servers), ActorRef.noSender());
+    }
+
+    @Override
+    public void process(WatchedEvent watchedEvent) {
+        update();
     }
 }
