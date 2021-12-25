@@ -46,7 +46,7 @@ public class AnonymaizerApp {
         }
 
         try {
-            zoo.create(SERVERS_PATH + "\\s",
+            zoo.create(SERVERS_PATH + "/s",
                     url.getBytes(),
                     ZooDefs.Ids.OPEN_ACL_UNSAFE,
                     CreateMode.EPHEMERAL_SEQUENTIAL);
