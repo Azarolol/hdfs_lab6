@@ -20,6 +20,22 @@ public class ZookeeperWatcher implements Watcher {
         this.storage = storage;
         this.zoo = zoo;
         this.log = log;
+
+        List<String> servers = new ArrayList<String>();
+        try {
+            servers = zoo.getChildren(SERVERS_PATH, this);
+        } catch (KeeperException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        for (String s : servers) {
+            try {
+                log.info(String.format(LOG_FORMAT_STRING, s));
+                servers.add(new String(zoo.getData(SERVERS_PATH + "/" + s, false, null)));
+            } catch (KeeperException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        storage.tell(new ServersListMessage(servers), ActorRef.noSender());
     }
 
     @Override
