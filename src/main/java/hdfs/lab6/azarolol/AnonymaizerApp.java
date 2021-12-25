@@ -4,6 +4,7 @@ import akka.NotUsed;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
+import akka.event.LoggingAdapter;
 import akka.http.javadsl.ConnectHttp;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.model.HttpRequest;
@@ -28,11 +29,12 @@ public class AnonymaizerApp {
         ActorRef storage = system.actorOf(Props.create(ConfigStorageActor.class));
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
+        final LoggingAdapter log = materializer.logger();
 
         final String port = args[INDEX_OF_SERVER];
         final String url = LOCALHOST + ":" + port;
         ZooKeeper zoo = new ZooKeeper(url, ZOOKEEPER_TIMEOUT, null);
-        ZookeeperWatcher watcher = new ZookeeperWatcher(storage, zoo);
+        ZookeeperWatcher watcher = new ZookeeperWatcher(storage, zoo, log);
 
         try {
             zoo.create(SERVERS_PATH,
@@ -43,7 +45,7 @@ public class AnonymaizerApp {
             e.printStackTrace();
         }
 
-        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = new HTTPServer(http, storage, materializer.logger()).createRoute().flow(system, materializer);
+        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = new HTTPServer(http, storage, log).createRoute().flow(system, materializer);
         http.bindAndHandle(routeFlow, ConnectHttp.toHost(LOCALHOST, Integer.parseInt(port)), materializer);
     }
 }
