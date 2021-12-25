@@ -26,6 +26,7 @@ public class ZookeeperWatcher implements Watcher {
 
         for (String s : servers) {
             servers.add(new String(zoo.getData(SERVERS_PATH + "/" + s, false, null)));
+        }
     }
 
     @Override
