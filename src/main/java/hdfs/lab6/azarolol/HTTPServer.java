@@ -18,7 +18,7 @@ public class HTTPServer {
     private static final String EMPTY_STRING = "";
     private static final String URL_QUERY = "url";
     private static final String COUNT_QUERY = "count";
-    private static final String URL = "https://%s/?url=%s&count=%d";
+    private static final String URL = "http://%s/?url=%s&count=%d";
     private static final String LOG_FORMAT_STRING = "Current request: url = %s, count = %s";
     private static final Duration ASK_TIMEOUT = Duration.ofMillis(5000);
 
