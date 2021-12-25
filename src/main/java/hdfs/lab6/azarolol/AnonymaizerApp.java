@@ -37,7 +37,7 @@ public class AnonymaizerApp {
         final String url = LOCALHOST + ":" + port;
         ZooKeeper zoo = null;
         try {
-            zoo = new ZooKeeper(url, ZOOKEEPER_TIMEOUT, null);
+            zoo = new ZooKeeper(port, ZOOKEEPER_TIMEOUT, null);
             new ZookeeperWatcher(storage, zoo, log);
         } catch (InterruptedException | KeeperException e) {
             e.printStackTrace();
