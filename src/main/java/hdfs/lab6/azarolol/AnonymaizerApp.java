@@ -22,7 +22,7 @@ import java.io.IOException;
 public class AnonymaizerApp {
     private static final String ACTOR_SYSTEM_NAME = "AnonymizerActors";
     private static final int INDEX_OF_SERVER = 0;
-    private static final int ZOOKEEPER_TIMEOUT = 3000;
+    private static final int ZOOKEEPER_TIMEOUT = 5000;
     private static final String SERVERS_PATH = "/servers";
     private static final String LOCALHOST = "127.0.0.1";
     private static final String ZOOKEEPER_PORT = "2181";
