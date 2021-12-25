@@ -39,7 +39,7 @@ public class AnonymaizerApp {
         try {
             zoo = new ZooKeeper(url, ZOOKEEPER_TIMEOUT, null);
             new ZookeeperWatcher(storage, zoo, log);
-        } catch (IOException e) {
+        } catch (InterruptedException | KeeperException e) {
             e.printStackTrace();
         }
 
