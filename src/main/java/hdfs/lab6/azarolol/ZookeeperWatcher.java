@@ -21,13 +21,7 @@ public class ZookeeperWatcher implements Watcher {
         this.zoo = zoo;
         this.log = log;
 
-        List<String> servers = new ArrayList<String>();
-        try {
-            servers = zoo.getChildren(SERVERS_PATH, this);
-        } catch (KeeperException | InterruptedException e) {
-            e.printStackTrace();
-            throw e
-        }
+        update();
     }
 
     public void update() {
